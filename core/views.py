@@ -1,6 +1,7 @@
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import Image
+from .forms import ImageForm
 # Create your views here.
 
 def home(request):
@@ -16,3 +17,12 @@ def download_image(request, id):
         return response
     except Image.DoesNotExist:
         return HttpResponse("Image not found", status=404)
+
+def add_image(request):
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/')
+    form = ImageForm()
+    return render(request, 'core/addimage.html', {'form': form})    

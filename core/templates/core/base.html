@@ -12,8 +12,9 @@
     {% endblock corecss %}
 </head>
 <body class="bg-body-tertiary">
-    <header>
-        <h1 class="bg-success-subtle text-bg-light p-2 fw-bold">All Images</h1>
+    <header class="bg-success-subtle p-2">
+        <h1 class="fw-bold">All Images</h1>
+        <a href="{% url 'add_image' %}" class="btn btn-sm btn-primary">Add Image</a>
     </header>
     <main>
         {% block content %}{% endblock content %}
